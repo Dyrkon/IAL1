@@ -125,7 +125,7 @@ void Stack_Top( const Stack *stack, char *dataPtr ) {
     if (Stack_IsEmpty(stack))
         Stack_Error(SERR_TOP);
 
-    dataPtr = stack->array + (stack->topIndex - 1);
+    dataPtr = &stack->array[stack->topIndex - 1];
 }
 
 
@@ -145,10 +145,9 @@ void Stack_Pop( Stack *stack ) {
 
     if (!Stack_IsEmpty(stack))
     {
-        for (int i = 1; i < MAX_STACK; i++)
-        {
-            stack->array[i - 1] = stack->array[i];
-        }
+        // test
+        printf("%c\n", stack->array[stack->topIndex]);
+        stack->topIndex--;
     }
 }
 
