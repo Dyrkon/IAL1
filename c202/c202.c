@@ -20,7 +20,7 @@
 **    Stack_Init .... inicializace zásobníku
 **    Stack_IsEmpty ... test na prázdnost zásobníku
 **    Stack_IsFull .... test na zaplněnost zásobníku
-**    Stack_Top ..... přečte hodnotu z vrcholu zásobníku
+**    Stack_Top ..... přečte hodnotu z vrcholu zásodbníku
 **    Stack_Pop ..... odstraní prvek z vrcholu zásobníku
 **    Stack_Push .... vloží prvku do zásobníku
 **
@@ -73,7 +73,8 @@ void Stack_Error( int error_code ) {
  * @param stack Ukazatel na strukturu zásobníku
  */
 void Stack_Init( Stack *stack ) {
-
+    if (stack == NULL)
+        Stack_Error(SERR_INIT);
     solved = FALSE; /* V případě řešení, smažte tento řádek! */
 }
 
