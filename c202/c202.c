@@ -125,7 +125,7 @@ void Stack_Top( const Stack *stack, char *dataPtr ) {
     if (Stack_IsEmpty(stack))
         Stack_Error(SERR_TOP);
 
-    dataPtr = &stack->array[stack->topIndex - 1];
+    *dataPtr = stack->array[stack->topIndex];
 }
 
 
