@@ -105,7 +105,8 @@ int Stack_IsEmpty( const Stack *stack ) {
  * @returns Nenulovou hodnotu v případě, že je zásobník plný, jinak nulu
  */
 int Stack_IsFull( const Stack *stack ) {
-    return stack->topIndex == MAX_STACK - 1 ? 1 : 0;
+//    printf("%d %s\n", stack->topIndex, stack->array);
+    return stack->topIndex == STACK_SIZE - 1 ? 1 : 0;
 }
 
 /**
@@ -144,11 +145,7 @@ void Stack_Top( const Stack *stack, char *dataPtr ) {
 void Stack_Pop( Stack *stack ) {
 
     if (!Stack_IsEmpty(stack))
-    {
-        // test
-        printf("%c\n", stack->array[stack->topIndex]);
         stack->topIndex--;
-    }
 }
 
 
