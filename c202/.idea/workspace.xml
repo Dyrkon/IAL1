@@ -19,9 +19,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d91abc43-ef62-46de-9fa4-f8e5d0f3447a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/c202-test" beforeDir="false" afterPath="$PROJECT_DIR$/c202-test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/c202.c" beforeDir="false" afterPath="$PROJECT_DIR$/c202.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/current-test.output" beforeDir="false" afterPath="$PROJECT_DIR$/current-test.output" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +76,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../c204" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -127,7 +124,7 @@
       <workItem from="1633429567342" duration="7000" />
       <workItem from="1633429741883" duration="851000" />
       <workItem from="1633446862258" duration="1081000" />
-      <workItem from="1633525212707" duration="1026000" />
+      <workItem from="1633525212707" duration="1154000" />
     </task>
     <servers />
   </component>

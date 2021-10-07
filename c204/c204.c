@@ -55,7 +55,22 @@ int solved;
  * @param postfixExpressionLength Ukazatel na aktuální délku výsledného postfixového výrazu
  */
 void untilLeftPar( Stack *stack, char *postfixExpression, unsigned *postfixExpressionLength ) {
+    if (Stack_IsEmpty(stack))
+        return;
 
+    int i = 0;
+    char c;
+
+    for (; i <= MAX_STACK - 1; ++i) {
+        Stack_Top(stack, &c);
+        Stack_Pop(stack);
+
+        if (c == '(')
+            break;
+
+        postfixExpression[i] = c;
+    }
+    *postfixExpressionLength = i;
 }
 
 /**
@@ -75,7 +90,25 @@ void untilLeftPar( Stack *stack, char *postfixExpression, unsigned *postfixExpre
  * @param postfixExpressionLength Ukazatel na aktuální délku výsledného postfixového výrazu
  */
 void doOperation( Stack *stack, char c, char *postfixExpression, unsigned *postfixExpressionLength ) {
+    if (Stack_IsEmpty(stack))
+        Stack_Push(stack, c);
+    else
+    {
+        char peek = 0;
+        Stack_Top(stack, &peek);
+        if (peek == '(' ||
+            ((c == '*' || c == '/') && (peek == '+' || peek == '-'))
+        )
+            Stack_Push(stack, c);
+        else
+        {
+            postfixExpression[(*postfixExpressionLength)++] = peek;
 
+            Stack_Pop(stack);
+
+            doOperation(stack, c, postfixExpression, postfixExpressionLength);
+        }
+    }
 }
 
 /**
@@ -128,8 +161,8 @@ void doOperation( Stack *stack, char c, char *postfixExpression, unsigned *postf
  */
 char *infix2postfix( const char *infixExpression ) {
 
-    solved = FALSE; /* V případě řešení smažte tento řádek! */
-    return NULL; /* V případě řešení můžete smazat tento řádek. */
+
+    return NULL;
 }
 
 /* Konec c204.c */
