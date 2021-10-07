@@ -90,6 +90,12 @@ void untilLeftPar( Stack *stack, char *postfixExpression, unsigned *postfixExpre
  * @param postfixExpressionLength Ukazatel na aktuální délku výsledného postfixového výrazu
  */
 void doOperation( Stack *stack, char c, char *postfixExpression, unsigned *postfixExpressionLength ) {
+    if (postfixExpressionLength == NULL || postfixExpression == NULL || stack == NULL)
+    {
+        fprintf(stderr, "doOperation failed due to on of the parameters being NULL");
+        return;
+    }
+
     if (Stack_IsEmpty(stack))
         Stack_Push(stack, c);
     else
