@@ -185,18 +185,27 @@ char *infix2postfix( const char *infixExpression ) {
     Stack_Init(&stack);
 
     for (int i = 0; infixExpression[i] != '\0' ; i++) {
-        if (isOperator(infixExpression[i]))
-            doOperation(&stack, infixExpression[i], postfixExpression, &length);
+        if (((infixExpression[i] >= 'a') && (infixExpression[i] <= 'z')) ||
+            (((infixExpression[i] >= 'A') && (infixExpression[i] <= 'Z')) ||
+             ((infixExpression[i] >= '0') && (infixExpression[i] <= '9'))))
+            postfixExpression[length++] = infixExpression[i];
+
         else if (infixExpression[i] == ')')
             untilLeftPar(&stack, postfixExpression, &length);
-        else if (((infixExpression[i] >= 'a') && (infixExpression[i] <= 'z')) ||
-        (((infixExpression[i] >= 'A') && (infixExpression[i] <= 'Z')) ||
-        ((infixExpression[i] >= '0') && (infixExpression[i] <= '9'))))
-            postfixExpression[length++] = infixExpression[i];
+
+        else if (infixExpression[i] == '(')
+            Stack_Push(&stack, infixExpression[i]);
+
+        else if (isOperator(infixExpression[i]))
+            doOperation(&stack, infixExpression[i], postfixExpression, &length);
+
         else if (infixExpression[i] == '=')
         {
             while (!Stack_IsEmpty(&stack))
+            {
                 Stack_Top(&stack, &postfixExpression[length++]);
+                Stack_Pop(&stack);
+            }
             postfixExpression[length++] = '=';
         }
     }
