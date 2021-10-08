@@ -58,19 +58,17 @@ void untilLeftPar( Stack *stack, char *postfixExpression, unsigned *postfixExpre
     if (Stack_IsEmpty(stack))
         return;
 
-    int i = 0;
     char c;
 
-    for (; i <= MAX_STACK - 1; ++i) {
+    while (!Stack_IsEmpty(stack)) {
         Stack_Top(stack, &c);
         Stack_Pop(stack);
 
         if (c == '(')
             break;
 
-        postfixExpression[i] = c;
+        postfixExpression[(*postfixExpressionLength)++] = c;
     }
-    *postfixExpressionLength = i;
 }
 
 /**
@@ -115,6 +113,18 @@ void doOperation( Stack *stack, char c, char *postfixExpression, unsigned *postf
             doOperation(stack, c, postfixExpression, postfixExpressionLength);
         }
     }
+}
+
+int isOperator(char c)
+{
+    switch (c) {
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            return 1;
+    }
+    return 0;
 }
 
 /**
@@ -166,9 +176,34 @@ void doOperation( Stack *stack, char c, char *postfixExpression, unsigned *postf
  * @returns Znakový řetězec obsahující výsledný postfixový výraz
  */
 char *infix2postfix( const char *infixExpression ) {
+    unsigned length = 0;
+    char *postfixExpression = NULL;
+    if ((postfixExpression = (char *) malloc(sizeof(char) * MAX_LEN)) == NULL)
+        return NULL;
 
+    Stack stack;
+    Stack_Init(&stack);
 
-    return NULL;
+    for (int i = 0; infixExpression[i] != '\0' ; i++) {
+        if (isOperator(infixExpression[i]))
+            doOperation(&stack, infixExpression[i], postfixExpression, &length);
+        else if (infixExpression[i] == ')')
+            untilLeftPar(&stack, postfixExpression, &length);
+        else if (((infixExpression[i] >= 'a') && (infixExpression[i] <= 'z')) ||
+        (((infixExpression[i] >= 'A') && (infixExpression[i] <= 'Z')) ||
+        ((infixExpression[i] >= '0') && (infixExpression[i] <= '9'))))
+            postfixExpression[length++] = infixExpression[i];
+        else if (infixExpression[i] == '=')
+        {
+            while (!Stack_IsEmpty(&stack))
+                Stack_Top(&stack, &postfixExpression[length++]);
+            postfixExpression[length++] = '=';
+        }
+    }
+
+    postfixExpression[length] = '\0';
+
+    return postfixExpression;
 }
 
 /* Konec c204.c */

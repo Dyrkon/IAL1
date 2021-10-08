@@ -72,7 +72,7 @@ void Stack_Error( int error_code ) {
  *
  * @param stack Ukazatel na strukturu zásobníku
  */
-void Stack_Init( Stack *stack ) {
+void Stack_Init( Stack *stack) {
     if (stack == NULL)
         Stack_Error(SERR_INIT);
 
