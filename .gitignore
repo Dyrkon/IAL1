@@ -51,4 +51,9 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+<<<<<<< HEAD
 c202/.idea/
+=======
+# Folders
+.idea/
+>>>>>>> 5169513934034b5fa0700f562d3f4d50b512295b

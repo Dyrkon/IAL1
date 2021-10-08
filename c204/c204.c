@@ -55,7 +55,20 @@ int solved;
  * @param postfixExpressionLength Ukazatel na aktuální délku výsledného postfixového výrazu
  */
 void untilLeftPar( Stack *stack, char *postfixExpression, unsigned *postfixExpressionLength ) {
+    if (Stack_IsEmpty(stack))
+        return;
 
+    char c;
+
+    while (!Stack_IsEmpty(stack)) {
+        Stack_Top(stack, &c);
+        Stack_Pop(stack);
+
+        if (c == '(')
+            break;
+
+        postfixExpression[(*postfixExpressionLength)++] = c;
+    }
 }
 
 /**
@@ -75,7 +88,43 @@ void untilLeftPar( Stack *stack, char *postfixExpression, unsigned *postfixExpre
  * @param postfixExpressionLength Ukazatel na aktuální délku výsledného postfixového výrazu
  */
 void doOperation( Stack *stack, char c, char *postfixExpression, unsigned *postfixExpressionLength ) {
+    if (postfixExpressionLength == NULL || postfixExpression == NULL || stack == NULL)
+    {
+        fprintf(stderr, "doOperation failed due to on of the parameters being NULL");
+        return;
+    }
 
+    if (Stack_IsEmpty(stack))
+        Stack_Push(stack, c);
+    else
+    {
+        char peek = 0;
+        Stack_Top(stack, &peek);
+        if (peek == '(' ||
+            ((c == '*' || c == '/') && (peek == '+' || peek == '-'))
+        )
+            Stack_Push(stack, c);
+        else
+        {
+            postfixExpression[(*postfixExpressionLength)++] = peek;
+
+            Stack_Pop(stack);
+
+            doOperation(stack, c, postfixExpression, postfixExpressionLength);
+        }
+    }
+}
+
+int isOperator(char c)
+{
+    switch (c) {
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            return 1;
+    }
+    return 0;
 }
 
 /**
@@ -127,9 +176,43 @@ void doOperation( Stack *stack, char c, char *postfixExpression, unsigned *postf
  * @returns Znakový řetězec obsahující výsledný postfixový výraz
  */
 char *infix2postfix( const char *infixExpression ) {
+    unsigned length = 0;
+    char *postfixExpression = NULL;
+    if ((postfixExpression = (char *) malloc(sizeof(char) * MAX_LEN)) == NULL)
+        return NULL;
 
-    solved = FALSE; /* V případě řešení smažte tento řádek! */
-    return NULL; /* V případě řešení můžete smazat tento řádek. */
+    Stack stack;
+    Stack_Init(&stack);
+
+    for (int i = 0; infixExpression[i] != '\0' ; i++) {
+        if (((infixExpression[i] >= 'a') && (infixExpression[i] <= 'z')) ||
+            (((infixExpression[i] >= 'A') && (infixExpression[i] <= 'Z')) ||
+             ((infixExpression[i] >= '0') && (infixExpression[i] <= '9'))))
+            postfixExpression[length++] = infixExpression[i];
+
+        else if (infixExpression[i] == ')')
+            untilLeftPar(&stack, postfixExpression, &length);
+
+        else if (infixExpression[i] == '(')
+            Stack_Push(&stack, infixExpression[i]);
+
+        else if (isOperator(infixExpression[i]))
+            doOperation(&stack, infixExpression[i], postfixExpression, &length);
+
+        else if (infixExpression[i] == '=')
+        {
+            while (!Stack_IsEmpty(&stack))
+            {
+                Stack_Top(&stack, &postfixExpression[length++]);
+                Stack_Pop(&stack);
+            }
+            postfixExpression[length++] = '=';
+        }
+    }
+
+    postfixExpression[length] = '\0';
+
+    return postfixExpression;
 }
 
 /* Konec c204.c */
