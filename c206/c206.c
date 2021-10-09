@@ -382,7 +382,11 @@ void DLL_InsertBefore( DLList *list, int data ) { // TODO check this
     newElement->previousElement = list->activeElement->previousElement;
     newElement->nextElement = list->activeElement;
 
-    list->activeElement->previousElement->nextElement = newElement;
+    if (list->activeElement == list->firstElement)
+        list->firstElement = newElement;
+    else
+        list->activeElement->previousElement->nextElement = newElement;
+
     list->activeElement->previousElement = newElement;
 }
 
