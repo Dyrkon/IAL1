@@ -74,7 +74,10 @@ void Stack_Error( int error_code ) {
  */
 void Stack_Init( Stack *stack) {
     if (stack == NULL)
+    {
         Stack_Error(SERR_INIT);
+        return;
+    }
 
     stack->topIndex = -1;
 }
@@ -124,7 +127,10 @@ int Stack_IsFull( const Stack *stack ) {
 void Stack_Top( const Stack *stack, char *dataPtr ) {
 
     if (Stack_IsEmpty(stack))
+    {
         Stack_Error(SERR_TOP);
+        return;
+    }
 
     *dataPtr = stack->array[stack->topIndex];
 }
@@ -145,7 +151,10 @@ void Stack_Top( const Stack *stack, char *dataPtr ) {
 void Stack_Pop( Stack *stack ) {
 
     if (!Stack_IsEmpty(stack))
+    {
+        stack->array[stack->topIndex] = '\0';
         stack->topIndex--;
+    }
 }
 
 
@@ -162,7 +171,10 @@ void Stack_Pop( Stack *stack ) {
 void Stack_Push( Stack *stack, char data ) {
 
     if (Stack_IsFull(stack))
+    {
         Stack_Error(SERR_PUSH);
+        return;
+    }
 
     stack->array[++stack->topIndex] = data;
 }
