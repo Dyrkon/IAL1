@@ -1,0 +1,242 @@
+==30961== Memcheck, a memory error detector
+==30961== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==30961== Using Valgrind-3.17.0-07f0cdcbb4-20210319X and LibVEX; rerun with -h for copyright info
+==30961== Command: ./c206-advanced-test
+==30961== Parent PID: 29767
+==30961== 
+--30961-- 
+--30961-- Valgrind options:
+--30961--    --leak-check=full
+--30961--    --show-leak-kinds=all
+--30961--    --track-origins=yes
+--30961--    --verbose
+--30961--    --log-file=valgrind-out.txt
+--30961-- Contents of /proc/version:
+--30961--   Linux version 5.14.9-zen2-1-zen (linux-zen@archlinux) (gcc (GCC) 11.1.0, GNU ld (GNU Binutils) 2.36.1) #1 ZEN SMP PREEMPT Fri, 01 Oct 2021 19:03:23 +0000
+--30961-- 
+--30961-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3-avx-f16c-rdrand
+--30961-- Page sizes: currently 4096, max supported 4096
+--30961-- Valgrind library directory: /usr/lib/valgrind
+--30961-- Reading syms from /home/dyrkon/code/C/IAL1/c206/c206-advanced-test
+--30961-- Reading syms from /usr/lib/ld-2.33.so
+--30961-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--30961--    object doesn't have a dynamic symbol table
+--30961-- Scheduler: using generic scheduler lock implementation.
+--30961-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==30961== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-30961-by-dyrkon-on-???
+==30961== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-30961-by-dyrkon-on-???
+==30961== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-30961-by-dyrkon-on-???
+==30961== 
+==30961== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==30961== don't want to do, unless you know exactly what you're doing,
+==30961== or are doing some strange experiment):
+==30961==   /usr/lib/valgrind/../../bin/vgdb --pid=30961 ...command...
+==30961== 
+==30961== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==30961==   /path/to/gdb ./c206-advanced-test
+==30961== and then give GDB the following command
+==30961==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=30961
+==30961== --pid is optional if only one valgrind process is running
+==30961== 
+--30961-- REDIR: 0x4023890 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bb342 (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--30961-- REDIR: 0x4023660 (ld-linux-x86-64.so.2:index) redirected to 0x580bb35c (vgPlain_amd64_linux_REDIR_FOR_index)
+--30961-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--30961-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+==30961== WARNING: new redirection conflicts with existing -- ignoring it
+--30961--     old: 0x04023890 (strlen              ) R-> (0000.0) 0x580bb342 vgPlain_amd64_linux_REDIR_FOR_strlen
+--30961--     new: 0x04023890 (strlen              ) R-> (2007.0) 0x048448d0 strlen
+--30961-- REDIR: 0x4020070 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4845730 (strcmp)
+--30961-- REDIR: 0x4023df0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x48491a0 (mempcpy)
+--30961-- Reading syms from /usr/lib/libm-2.33.so
+--30961--    object doesn't have a symbol table
+--30961-- Reading syms from /usr/lib/libc-2.33.so
+--30961-- REDIR: 0x4a550b0 (libc.so.6:memmove) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a545b0 (libc.so.6:strncpy) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a553f0 (libc.so.6:strcasecmp) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a54050 (libc.so.6:strcat) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a54610 (libc.so.6:rindex) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a567a0 (libc.so.6:rawmemchr) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a6e7f0 (libc.so.6:wmemchr) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a6e330 (libc.so.6:wcscmp) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a55210 (libc.so.6:mempcpy) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a55040 (libc.so.6:bcmp) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a54540 (libc.so.6:strncmp) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a54100 (libc.so.6:strcmp) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a55180 (libc.so.6:memset) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a6e2f0 (libc.so.6:wcschr) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a544a0 (libc.so.6:strnlen) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a541e0 (libc.so.6:strcspn) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a55440 (libc.so.6:strncasecmp) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a54180 (libc.so.6:strcpy) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a55590 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a6fa40 (libc.so.6:wcsnlen) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a6e370 (libc.so.6:wcscpy) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a54650 (libc.so.6:strpbrk) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a540b0 (libc.so.6:index) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a54460 (libc.so.6:strlen) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a5ac10 (libc.so.6:memrchr) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a55490 (libc.so.6:strcasecmp_l) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a55000 (libc.so.6:memchr) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a6e440 (libc.so.6:wcslen) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a54770 (libc.so.6:strspn) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a55390 (libc.so.6:stpncpy) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a55330 (libc.so.6:stpcpy) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a567e0 (libc.so.6:strchrnul) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a554e0 (libc.so.6:strncasecmp_l) redirected to 0x48331b0 (_vgnU_ifunc_wrapper)
+--30961-- REDIR: 0x4a638e0 (libc.so.6:__strrchr_sse2) redirected to 0x4844350 (__strrchr_sse2)
+--30961-- REDIR: 0x4a63be0 (libc.so.6:__strlen_sse2) redirected to 0x4844810 (__strlen_sse2)
+--30961-- REDIR: 0x4a50320 (libc.so.6:malloc) redirected to 0x483e750 (malloc)
+--30961-- REDIR: 0x4a6dad0 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4848db0 (mempcpy)
+--30961-- REDIR: 0x4a636d0 (libc.so.6:__strchrnul_sse2) redirected to 0x4848ca0 (strchrnul)
+--30961-- REDIR: 0x4a50980 (libc.so.6:free) redirected to 0x4841120 (free)
+==30961== Invalid write of size 8
+==30961==    at 0x1097A3: DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109FC8: test_DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AEDF: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==  Address 0x4b94910 is 16 bytes inside a block of size 20 alloc'd
+==30961==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==30961==    by 0x109762: DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109FC8: test_DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AEDF: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x10990E: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10A003: test_DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AEDF: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== Conditional jump or move depends on uninitialised value(s)
+==30961==    at 0x109931: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10A003: test_DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AEDF: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x109954: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10A003: test_DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AEDF: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x10990E: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109C19: test_DLL_Last (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF34: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x109954: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109C19: test_DLL_Last (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF34: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x10990E: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109EAC: test_DLL_DeleteAfter (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF3E: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x109954: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109EAC: test_DLL_DeleteAfter (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF3E: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x10990E: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109F89: test_DLL_InsertAfter (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF7F: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x109954: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109F89: test_DLL_InsertAfter (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF7F: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x1091FC: DLL_Dispose (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109A24: test_DLL_Dispose (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AFD4: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== 
+==30961== HEAP SUMMARY:
+==30961==     in use at exit: 0 bytes in 0 blocks
+==30961==   total heap usage: 15 allocs, 15 frees, 1,356 bytes allocated
+==30961== 
+==30961== All heap blocks were freed -- no leaks are possible
+==30961== 
+==30961== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 0 from 0)
+==30961== 
+==30961== 1 errors in context 1 of 11:
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x1091FC: DLL_Dispose (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109A24: test_DLL_Dispose (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AFD4: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== 
+==30961== 1 errors in context 2 of 11:
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x109954: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109F89: test_DLL_InsertAfter (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF7F: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== 
+==30961== 1 errors in context 3 of 11:
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x10990E: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109F89: test_DLL_InsertAfter (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF7F: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== 
+==30961== 1 errors in context 4 of 11:
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x109954: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109EAC: test_DLL_DeleteAfter (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF3E: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== 
+==30961== 1 errors in context 5 of 11:
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x10990E: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109EAC: test_DLL_DeleteAfter (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF3E: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== 
+==30961== 1 errors in context 6 of 11:
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x109954: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109C19: test_DLL_Last (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF34: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== 
+==30961== 1 errors in context 7 of 11:
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x10990E: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109C19: test_DLL_Last (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AF34: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== 
+==30961== 1 errors in context 8 of 11:
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x109954: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10A003: test_DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AEDF: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== 
+==30961== 1 errors in context 9 of 11:
+==30961== Conditional jump or move depends on uninitialised value(s)
+==30961==    at 0x109931: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10A003: test_DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AEDF: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== 
+==30961== 1 errors in context 10 of 11:
+==30961== Use of uninitialised value of size 8
+==30961==    at 0x10990E: print_elements_of_list (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10A003: test_DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AEDF: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== 
+==30961== 1 errors in context 11 of 11:
+==30961== Invalid write of size 8
+==30961==    at 0x1097A3: DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109FC8: test_DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AEDF: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==  Address 0x4b94910 is 16 bytes inside a block of size 20 alloc'd
+==30961==    at 0x483E7C5: malloc (vg_replace_malloc.c:380)
+==30961==    by 0x109762: DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x109FC8: test_DLL_InsertBefore (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961==    by 0x10AEDF: main (in /home/dyrkon/code/C/IAL1/c206/c206-advanced-test)
+==30961== 
+==30961== ERROR SUMMARY: 11 errors from 11 contexts (suppressed: 0 from 0)

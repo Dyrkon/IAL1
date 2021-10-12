@@ -100,7 +100,7 @@ void DLL_Dispose( DLList *list ) {
     DLLElementPtr removed = list->firstElement;
     DLLElementPtr nextRemoved;
 
-    while (removed->nextElement != NULL)
+    while (removed != NULL)
     {
         nextRemoved = removed->nextElement;
         free(removed);
