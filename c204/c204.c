@@ -55,19 +55,19 @@ int solved;
  * @param postfixExpressionLength Ukazatel na aktuální délku výsledného postfixového výrazu
  */
 void untilLeftPar( Stack *stack, char *postfixExpression, unsigned *postfixExpressionLength ) {
-    if (Stack_IsEmpty(stack))
+    if (Stack_IsEmpty(stack)) // Ověříme, že stack není prázdný
         return;
 
     char c;
 
-    while (!Stack_IsEmpty(stack)) {
-        Stack_Top(stack, &c);
-        Stack_Pop(stack);
+    while (!Stack_IsEmpty(stack)) { // Dokud stack není prázdný opakujeme
+        Stack_Top(stack, &c);  // Vrchní element umístíme do pomocné proměnné
+        Stack_Pop(stack);   // Odstraníme vrchní prvek ze zásobníku
 
-        if (c == '(')
+        if (c == '(') // Když narazíme na (, tak vyskočíme z funkce
             break;
 
-        postfixExpression[(*postfixExpressionLength)++] = c;
+        postfixExpression[(*postfixExpressionLength)++] = c; // Cokoliv jiného, než '(' přidáme na konec postfixového řetězce
     }
 }
 
@@ -88,23 +88,21 @@ void untilLeftPar( Stack *stack, char *postfixExpression, unsigned *postfixExpre
  * @param postfixExpressionLength Ukazatel na aktuální délku výsledného postfixového výrazu
  */
 void doOperation( Stack *stack, char c, char *postfixExpression, unsigned *postfixExpressionLength ) {
-    if (postfixExpressionLength == NULL || postfixExpression == NULL || stack == NULL)
+    if (postfixExpressionLength == NULL || postfixExpression == NULL || stack == NULL) // Zkontroluji si, že mi do funkce nejdou parametry s  hodnotou NULL
     {
         fprintf(stderr, "doOperation failed due to on of the parameters being NULL");
         return;
     }
 
-    if (Stack_IsEmpty(stack))
+    if (Stack_IsEmpty(stack)) // Pokud je stack prázdný, umístíme na něj operátor
         Stack_Push(stack, c);
     else
     {
         char peek = 0;
-        Stack_Top(stack, &peek);
-        if (peek == '(' ||
-            ((c == '*' || c == '/') && (peek == '+' || peek == '-'))
-        )
+        Stack_Top(stack, &peek); // Nahlédneme na vrchní prvek na zásobníku
+        if (peek == '(' || ((c == '*' || c == '/') && (peek == '+' || peek == '-'))) // Pokud je na vrcholu zásobníku '(', nebo operátor s menší prioritou než ten předaný v char c, tak c umístíme na zásobník
             Stack_Push(stack, c);
-        else
+        else  // Jinak přidáme to co jsme získali na zásobníku na konec postifixového výrazu a popneme tento prvek ze zásobníku. Následně opětovně zavoláme doOperation
         {
             postfixExpression[(*postfixExpressionLength)++] = peek;
 
@@ -115,7 +113,7 @@ void doOperation( Stack *stack, char c, char *postfixExpression, unsigned *postf
     }
 }
 
-int isOperator(char c)
+int isOperator(char c) // Pomocná funkce pro rozhodnutí, zda char c je operátor
 {
     switch (c) {
         case '+':
@@ -176,30 +174,30 @@ int isOperator(char c)
  * @returns Znakový řetězec obsahující výsledný postfixový výraz
  */
 char *infix2postfix( const char *infixExpression ) {
-    unsigned length = 0;
-    char *postfixExpression = NULL;
-    if ((postfixExpression = (char *) malloc(sizeof(char) * MAX_LEN)) == NULL)
-        return NULL;
+    unsigned length = 0;                                                                //
+    char *postfixExpression = NULL;                                                     //
+    if ((postfixExpression = (char *) malloc(sizeof(char) * MAX_LEN)) == NULL)     //
+        return NULL;                                                                    // Setup pomocné proměné, výsledného postfixového řetězce a zásobníku
 
-    Stack stack;
-    Stack_Init(&stack);
+    Stack stack;                                                                        //
+    Stack_Init(&stack);                                                                 //
 
-    for (int i = 0; infixExpression[i] != '\0' ; i++) {
-        if (((infixExpression[i] >= 'a') && (infixExpression[i] <= 'z')) ||
-            (((infixExpression[i] >= 'A') && (infixExpression[i] <= 'Z')) ||
-             ((infixExpression[i] >= '0') && (infixExpression[i] <= '9'))))
+    for (int i = 0; infixExpression[i] != '\0' ; i++) {                                 // Cyklujeme dokud nenarazíme na konec
+        if  (((infixExpression[i] >= 'a') && (infixExpression[i] <= 'z')) ||             // Pokud je charakter alfanumerický, tak ho umístíme na konec postfixového výrazu
+			(((infixExpression[i] >= 'A') && (infixExpression[i] <= 'Z')) ||
+			 ((infixExpression[i] >= '0') && (infixExpression[i] <= '9'))))
             postfixExpression[length++] = infixExpression[i];
 
-        else if (infixExpression[i] == ')')
+        else if (infixExpression[i] == ')')                                             // Pokud je charakter ')', voláme funkci untilLeftPar
             untilLeftPar(&stack, postfixExpression, &length);
 
-        else if (infixExpression[i] == '(')
+        else if (infixExpression[i] == '(')                                             // Pokud je charakter '(', umístíme jej na stack
             Stack_Push(&stack, infixExpression[i]);
 
-        else if (isOperator(infixExpression[i]))
+        else if (isOperator(infixExpression[i]))                                        // Pokud je charakter operátor, voláme funkci doOperation
             doOperation(&stack, infixExpression[i], postfixExpression, &length);
 
-        else if (infixExpression[i] == '=')
+        else if (infixExpression[i] == '=')                                             // Pokud narazíme na '=' v infixovém řetězci, tak vyprazdňujeme zásobník do postfixového řetězce, až dokud není prázdný, přidáme pak ještě na konec '='
         {
             while (!Stack_IsEmpty(&stack))
             {
@@ -210,7 +208,7 @@ char *infix2postfix( const char *infixExpression ) {
         }
     }
 
-    postfixExpression[length] = '\0';
+    postfixExpression[length] = '\0';                                                   // Řetězec pak ukončíme a vrátíme
 
     return postfixExpression;
 }
