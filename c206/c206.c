@@ -65,8 +65,8 @@ int solved;
  * Tato funkce bude volána z některých dále implementovaných operací.
  */
 void DLL_Error() {
-	printf("*ERROR* The program has performed an illegal operation.\n");
-	error_flag = TRUE;
+    printf("*ERROR* The program has performed an illegal operation.\n");
+    error_flag = TRUE;
 }
 
 /**
@@ -79,7 +79,11 @@ void DLL_Error() {
  * @param list Ukazatel na strukturu dvousměrně vázaného seznamu
  */
 void DLL_Init( DLList *list ) {
+<<<<<<< HEAD
     list->activeElement = NULL; // Nastavíme ukazatele na prvky na NULL
+=======
+    list->activeElement = NULL;
+>>>>>>> origin/advanced
     list->firstElement = NULL;
     list->lastElement = NULL;
 
@@ -93,11 +97,22 @@ void DLL_Init( DLList *list ) {
  * @param list Ukazatel na inicializovanou strukturu dvousměrně vázaného seznamu
  */
 void DLL_Dispose( DLList *list ) {
+<<<<<<< HEAD
     list->activeElement = NULL;                 // Nastavíme aktivní prvek na NULL a uděláme si pomocné proměnné na mazání
     DLLElementPtr removed = list->firstElement;
     DLLElementPtr nextRemoved;
 
     while (removed->nextElement != NULL)    // Dokud existuje prvek na vymazání, opakujeme
+=======
+    if (list->firstElement == NULL)
+        return;
+
+    list->activeElement = NULL;
+    DLLElementPtr removed = list->firstElement;
+    DLLElementPtr nextRemoved;
+
+    while (removed != NULL)
+>>>>>>> origin/advanced
     {
         nextRemoved = removed->nextElement;
         free(removed);
@@ -180,7 +195,7 @@ void DLL_InsertLast( DLList *list, int data ) {
  * @param list Ukazatel na inicializovanou strukturu dvousměrně vázaného seznamu
  */
 void DLL_First( DLList *list ) {
-    list != NULL ? list->activeElement = list->firstElement : NULL; // Pokud ukazatel na list není NULL, nastavíme jako aktivní prvek ten první
+    list->activeElement = list->firstElement; // Nastavíme jako aktivní prvek ten první
 }
 
 /**
@@ -246,7 +261,6 @@ void DLL_DeleteFirst( DLList *list ) {
 
     DLLElementPtr toBeRemoved = list->firstElement;
 
-//    toBeRemoved->nextElement->previousElement = NULL;
     list->firstElement = list->firstElement->nextElement;
     free(toBeRemoved);
 }
@@ -331,7 +345,6 @@ void DLL_DeleteBefore( DLList *list ) {
  */
 void DLL_InsertAfter( DLList *list, int data ) {
     if (list->activeElement == NULL) // Ověříme, že aktivní element není NULL
-        return;
 
     DLLElementPtr newElement;
 
@@ -352,8 +365,6 @@ void DLL_InsertAfter( DLList *list, int data ) {
         list->activeElement->nextElement->previousElement = newElement; // Ukazatel na předchozí prvek dalšího prvku bude nový element
 
     list->activeElement->nextElement = newElement;
-
-
 }
 
 /**
@@ -429,6 +440,7 @@ void DLL_SetValue( DLList *list, int data ) {
  * @param list Ukazatel na inicializovanou strukturu dvousměrně vázaného seznamu
  */
 void DLL_Next( DLList *list ) {
+<<<<<<< HEAD
     if (list->activeElement == NULL) // Ověříme, že aktivní element není NULL
         return;
 
@@ -444,7 +456,7 @@ void DLL_Next( DLList *list ) {
  * @param list Ukazatel na inicializovanou strukturu dvousměrně vázaného seznamu
  */
 void DLL_Previous( DLList *list ) {
-    if (list->activeElement == NULL) // Ověříme, že aktivní element není NULL
+	if (list->activeElement == NULL) // Ověříme, že aktivní element není NULL
         return;
 
     list->activeElement = list->activeElement->previousElement; // Do aktivního prvku předám prvek před ním

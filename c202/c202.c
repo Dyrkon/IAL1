@@ -73,8 +73,15 @@ void Stack_Error( int error_code ) {
  * @param stack Ukazatel na strukturu zásobníku
  */
 void Stack_Init( Stack *stack) {
+<<<<<<< HEAD
     if (stack == NULL) // Ošetříme, že předaný ukazatel neukazuje na NULL a případně zavoláme chybu
+=======
+    if (stack == NULL)
+    {
+>>>>>>> origin/advanced
         Stack_Error(SERR_INIT);
+        return;
+    }
 
     stack->topIndex = -1; // Nastavíme zásobník jako prázný => má nula prvků
 }
@@ -122,8 +129,15 @@ int Stack_IsFull( const Stack *stack ) {
  */
 void Stack_Top( const Stack *stack, char *dataPtr ) {
 
+<<<<<<< HEAD
     if (Stack_IsEmpty(stack)) // Ošetříme, že zásobník není prázdný, podle potřeby voláme chybu
+=======
+    if (Stack_IsEmpty(stack))
+    {
+>>>>>>> origin/advanced
         Stack_Error(SERR_TOP);
+        return;
+    }
 
     *dataPtr = stack->array[stack->topIndex]; // Předáme data na vrcholu zásobníku přes dereferenci
 }
@@ -144,7 +158,9 @@ void Stack_Top( const Stack *stack, char *dataPtr ) {
 void Stack_Pop( Stack *stack ) {
 
     if (!Stack_IsEmpty(stack)) // Pokud není zásobník prázdný, posuneme topIndex o jedno dolů a uvolníme k zápisu tak nejvrchnější prvek
+        stack->array[stack->topIndex] = '\0';
         stack->topIndex--;
+    }
 }
 
 
@@ -162,6 +178,8 @@ void Stack_Push( Stack *stack, char data ) {
 
     if (Stack_IsFull(stack)) //  Zkontrolujeme, že zásobník není plný
         Stack_Error(SERR_PUSH);
+        return;
+    }
 
     stack->array[++stack->topIndex] = data; // natlačíme do nejvrchnějšího prvku podle topIndex data a topIndex zvětšíme o 1
 }
